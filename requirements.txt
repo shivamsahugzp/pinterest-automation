@@ -1,0 +1,13 @@
+requests==2.31.0
+pillow==10.0.1
+schedule==1.2.0
+replicate==0.20.0
+
+# Optional: For better image processing
+# opencv-python==4.8.1.78
+# numpy==1.24.3
+
+# For Amazon Product Advertising API (if using official SDK)
+# python-amazon-paapi==5.0.1
+# paapi5-python-sdk==1.1.0
+

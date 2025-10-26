@@ -1,0 +1,37 @@
+# Config and credentials
+config.json
+*.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+ENV/
+env/
+
+# Data files
+posted_products.json
+*.log
+automation.log
+
+# Images
+images/
+temp_*
+*_upscaled.jpg
+*_pinterest_optimized.jpg
+*.jpg
+*.png
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+

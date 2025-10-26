@@ -1,0 +1,41 @@
+name: Daily Pinterest Pins Automation
+
+on:
+  schedule:
+    # Run daily at 8:00 AM UTC (adjust for your timezone)
+    - cron: '0 8 * * *'
+  workflow_dispatch: # Allow manual triggering
+
+jobs:
+  create_pins:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        pip install requests beautifulsoup4 schedule pillow
+    
+    - name: Run daily pin automation
+      env:
+        ASSOCIATE_TAG: ${{ secrets.AMAZON_ASSOCIATE_TAG }}
+        PINTEREST_TOKEN: ${{ secrets.PINTEREST_TOKEN }}
+        REPLICATE_API_KEY: ${{ secrets.REPLICATE_API_KEY }}
+      run: |
+        python daily_automated_pins.py
+    
+    - name: Commit and push results
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add -A
+        git commit -m "Auto: Updated daily pins" || exit 0
+        git push || exit 0
+
