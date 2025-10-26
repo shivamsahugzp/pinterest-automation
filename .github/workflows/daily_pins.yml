@@ -1,0 +1,29 @@
+name: Daily Pinterest Pins Automation
+
+on:
+  schedule:
+    - cron: '0 8 * * *'
+  workflow_dispatch:
+
+jobs:
+  create_pins:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        pip install requests beautifulsoup4 schedule pillow
+    
+    - name: Run daily pin automation
+      env:
+        ASSOCIATE_TAG: ${{ secrets.AMAZON_ASSOCIATE_TAG }}
+      run: |
+        python daily_automated_pins.py
